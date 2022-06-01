@@ -1,32 +1,16 @@
 import Slider from './Slider';
-import Items from './Items';
+import Products from './Products';
 import Cart from './Cart';
-import useLocalStorage from '../storage/uselocalstorage';
 
-import { React, useEffect, useState } from 'react'
+import { React } from 'react'
 
-const DemoShop = ({items}) => {
-    const [showCart, setShowCart] = useState(false);
+const DemoShop = ({cartItems, products, setCart, showCart, onToggleCart, settings}) => {
     
-    useEffect(()=>{
-        const toggleCart = (e) => {
-            if(e.detail && e.detail.counter !== 0){
-                setShowCart(!showCart);
-            }
-            else {
-                setShowCart(false);
-            }
-        }
-        window.addEventListener('toggleCart', toggleCart);
-        return () => {
-            window.removeEventListener('toggleCart', toggleCart);
-        }
-    },[showCart])
   return (
     <div className="container">
         <Slider />
-        <Items items = {items} />
-        <Cart cartItems ={items} show={showCart}/>
+        <Products products = {products} setCart={setCart} cartItems={cartItems}/>
+        <Cart show={showCart} cartItems={cartItems} setCart={setCart} onToggleCart = {onToggleCart} settings={settings} />
     </div>
   )
 }

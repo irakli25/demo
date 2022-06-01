@@ -1,31 +1,17 @@
-import { React, useState, useEffect } from 'react'
+import { React } from 'react'
 import PropTypes from 'prop-types'
 import { Outlet, Link } from "react-router-dom";
 import { HiShoppingCart } from 'react-icons/hi';
 
-const Header = ({title, subtitle}) => {
-
-    const [scrollValue , setScrollValue] = useState(0);
-    const [cartCounter, setCartCounter] = useState(5);
-    const onScroll = (e) => {
-        setScrollValue(e.target.documentElement.scrollTop);
-      };
-
-    useEffect(()=>{
-        window.addEventListener('scroll', onScroll);
-        return () => {
-        window.removeEventListener('scroll', onScroll);
-        }
-    },[scrollValue])
-
-    const _cartClick = () => {
-        document.dispatchEvent(new CustomEvent('toggleCart', {"bubbles":true, detail: {counter: cartCounter}}));
-    }
-
+const Header = ({   title, 
+                    subtitle, 
+                    cartCounter,
+                    onToggleCart
+                }) => {
   return (
-      <header style={scrollValue > 65 ? {position:'fixed', borderTop: 'none'} : {}}>
+      <header>
             <div className="container">
-                <div className="upHeader" style={scrollValue > 65 ? {display:'none'} : {}}>
+                <div className="upHeader">
                     <div className="socialIcons">
                         <div className="socialIcon linkedin"></div>
                         <div className="socialIcon twitter"></div>
@@ -55,7 +41,7 @@ const Header = ({title, subtitle}) => {
                                 <li><Link to="/" >FULL WIDTH</Link></li>
                                 <li><Link to="/" >DROPDOWN</Link></li>
                                 <li><Link to="/" >PORTFOLIO</Link></li>
-                                <li className='headerCart' onClick={_cartClick}><Link to="/" ><HiShoppingCart /><span className='headerCartCounter'>{cartCounter}</span></Link></li>
+                                <li className='headerCart' onClick={onToggleCart}><Link to="/" ><HiShoppingCart /><span className='headerCartCounter'>{cartCounter}</span></Link></li>
                             </ul>
                         </nav>
                         <Outlet />

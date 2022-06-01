@@ -1,7 +1,6 @@
 const Koa = require('koa');
 const Router = require('@koa/router');
-const render = require('koa-ejs');
-const path = require('path');
+const cors = require('@koa/cors');
 const serve = require('koa-static');
 const KoaBodyParser = require('koa-bodyparser');
 const axiosInstance = require('./utils/axiosInstance');
@@ -10,7 +9,7 @@ const qs = require('qs');
 
 const app = new Koa();
 const router = new Router();
-
+app.use(cors());
 app.keys = ['secret'];
 app.use(KoaBodyParser());
 app.use(session({
@@ -24,28 +23,6 @@ app.use(session({
 app.use(router.routes()).use(router.allowedMethods());
 
 app.use(serve('.'));
-app.use(serve('../assets'));
-app.use(serve('../views'));
-
-let title = 'test';
-
-setTimeout(async () => {
-    title = '123456';
-}, 2000);
-
-render(app, {
-    root: path.join(__dirname, 'views'),
-    layout: 'layout',
-    viewExt: 'html',
-    cache: false,
-    debug: false
-});
-
-router.get('/', async ctx => {
-    await ctx.render('index', {
-        title
-    });
-});
 
 router.post('/gettocken', KoaBodyParser(), async ctx => {
     const { data : {access_token} }  = await axiosInstance(ctx)
