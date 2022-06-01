@@ -5,7 +5,9 @@ const serve = require('koa-static');
 const KoaBodyParser = require('koa-bodyparser');
 const axiosInstance = require('./utils/axiosInstance');
 const session = require('koa-session');
+const mount = require('koa-mount');
 const qs = require('qs');
+const send = require('koa-send');
 
 const app = new Koa();
 const router = new Router();
@@ -20,9 +22,24 @@ app.use(session({
     autoCommit: true,
 }, app));
 
+// const static_pages = new Koa();
+// static_pages.use(serve(__dirname + "./build"));
+
+app.use(serve('./build'));
+
+router.get('/', async ctx => {
+    send(ctx, './build/index.html');
+})
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.use(serve('.'));
+
+
+
+
+
+app.use(KoaBodyParser());
 
 router.post('/gettocken', KoaBodyParser(), async ctx => {
     const { data : {access_token} }  = await axiosInstance(ctx)
