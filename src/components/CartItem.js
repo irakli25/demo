@@ -1,8 +1,9 @@
-import {React, useState } from 'react'
+import {React, useEffect, useState } from 'react'
 
 import { HiMinus, HiPlus, HiOutlineX } from 'react-icons/hi';
 
-  const CartItem = ({product,setCart, cartItems, onClose}) => {
+  const CartItem = ({product,setCart, cartItems, onDeleteProductCart}) => {
+
     const [quantity, setQuantity] = useState(Number(product.quantity));
     const quantityIncrease = () => {
       setQuantity(quantity + 1);
@@ -11,17 +12,16 @@ import { HiMinus, HiPlus, HiOutlineX } from 'react-icons/hi';
       if(quantity !== 1)
         setQuantity(quantity - 1);
     }
-    const changeQuantity = (e) => {
-      if(e.key >= 0 && e.key <= 9)
-      setQuantity(Number(e.key));
-    }
-    const onDelete = () => {
-      const newList = cartItems.filter(item => item.product_id !== product.product_id)
-      setCart(newList);
-      if(newList.length === 0) {
-        onClose();
-      }
-    }
+    // const changeQuantity = (e) => {
+    //   if(e.key >= 0 && e.key <= 9)
+    //   setQuantity(Number(e.key));
+    // }
+    
+    // onUpdateQuantity
+    useEffect(()=> {
+      setQuantity(product.quantity);
+    }, [product, cartItems])
+
   return (
     <div className='cartItem'>
       <div className='leftSide'>
@@ -43,7 +43,7 @@ import { HiMinus, HiPlus, HiOutlineX } from 'react-icons/hi';
               <span className='currency'>₾</span>
               <span className='price'>{product.unit_price}</span>
             </div>
-            <HiOutlineX className='close' onClick={onDelete}/>
+            <HiOutlineX className='close' onClick={() => onDeleteProductCart(product.product_id)}/>
           </div>
       </div>
     </div>

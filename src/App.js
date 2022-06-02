@@ -15,7 +15,7 @@ const App = () => {
       title: '',
       unit_price: "10.50",
       description: "test_product",
-      quantity: "1",
+      quantity: 1,
       product_id: "123450"
     },
     {
@@ -23,12 +23,34 @@ const App = () => {
       title: '',
       unit_price: "10.50",
       description: "test_product",
-      quantity: "1",
+      quantity: 1,
       product_id: "123451"
     }
   ]);
   const [cartItems, setCart] = useLocalStorage('cart',[]);
-  const [settings, setSettings] = useLocalStorage('settings',[]);
+  const [settings, setSettings] = useLocalStorage('settings',{
+    ttl: 0,
+    redirect_urls: {
+      success: '',
+      fail: ''
+    },
+    callback_url: '',
+    external_order_id: '123456',
+    purchase_units: {
+      total_amount: '0',
+      delivery: {
+        amount: '0',
+        exclude: false
+      },
+      currency: '',
+      basket: []
+    },
+    buyer: {
+      full_name: '',
+      masked_email: '',
+      masked_phone: ''
+    }
+});
   const [cartCounter, setCartCounter] = useState(0);
   const [showCart, setShowCart] = useState(false);
   const toggleCart = (e) => {
@@ -38,6 +60,13 @@ const App = () => {
       else {
           setShowCart(false);
       }
+  }
+  const onDeleteProductCart = (productID) => {
+    const newList = cartItems.filter(item => item.product_id !== productID)
+    setCart(newList);
+    if(newList.length === 0 && showCart) {
+      toggleCart();
+    }
   }
 
       useEffect(()=>{
@@ -55,8 +84,8 @@ const App = () => {
                   onToggleCart = {toggleCart}
           />
           <Routes>
-            <Route index element={<DemoShop cartItems={cartItems} products={products} setCart={setCart} showCart = {showCart} onToggleCart = {toggleCart} settings={settings}/>} />
-            <Route path='/settings' element={<Settings products={products} setProducts = {setProducts} settings={settings} setSettings={setSettings}/>} />
+            <Route index element={<DemoShop cartItems={cartItems} products={products} setCart={setCart} showCart = {showCart} onToggleCart = {toggleCart} settings={settings} onDeleteProductCart = {onDeleteProductCart}/>} />
+            <Route path='/settings' element={<Settings products={products} setProducts = {setProducts} settings={settings} setSettings={setSettings} onDeleteProductCart = {onDeleteProductCart}/>} />
           </Routes>
       </Router>
     </div>

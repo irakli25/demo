@@ -303,7 +303,7 @@ section .container{
   z-index: 1;
   top: 17px;
   left: 17px;
-  background-image: url("../public/img/docs.jpg"); 
+  background-image: url("../public/img/docs.png"); 
   background-repeat: no-repeat; 
   background-size:cover;
 }
@@ -313,7 +313,7 @@ section .container{
   height: 270px;
   display: grid;
   padding: 20px 0;
-  grid-gap: 37px;
+  grid-gap: 24px;
 }
 
 .sliderTitle{

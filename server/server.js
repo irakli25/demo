@@ -54,12 +54,12 @@ router.post('/gettocken', KoaBodyParser(), async ctx => {
 
 router.post('/geturl', KoaBodyParser(), async ctx => { 
     const { data } = await axiosInstance(ctx)
-    .post(`https://dev.ipay.ge/opay/api/v1/checkout/orders`, ctx.request.body, {
+    .post(`https://apim-test.k8s.bog.ge/pa-payment-services/v1/ecommerce/orders`, ctx.request.body, {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'accept-language': 'ka'
         }
     });
-
     ctx.body = data;
 });
 

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Slider = ({title}) => {
+const Slider = ({title, subtitle}) => {
+
+    const docs = () => {
+        window.open('https://api.bog.ge/docs/').focus()
+    }
+
     return (
         <div className="slider">
             <div className="tvWrapper">
@@ -10,8 +15,8 @@ const Slider = ({title}) => {
             </div>
             <div className="textWrapper">
                 <h2 className="sliderTitle">{title}</h2>
-                <p className="sliderText" >Cursuspenatisaccum ut curabitur nulla tellus tor ames a in curabitur pede. Idet mollisi eros dis orci congue elis et curabitur consequam intesque. Curabiturpisametur in ante.</p>
-                <button className="sliderButton" >კალათაში დამატება</button>
+                <p className="sliderText" >{subtitle}</p>
+                <button className="sliderButton" onClick={docs} >დოკუმენტაცია</button>
             </div>
             <div className="sliderDots">
                 <div className="dot active"></div>
@@ -25,7 +30,8 @@ const Slider = ({title}) => {
 }
 
 Slider.defaultProps = {
-    title: 'YOUR TITLE HERE'
+    title: 'API სერვისები თქვენი ბიზნესის განვითარებისთვის',
+    subtitle: 'შემოუერთდით 1000+ კომპანიას, რომელსაც საკუთარ ციფრულ პროდუქტებში ინტეგრირებული აქვს საქართველოს ბანკის API სერვისები.'
 }
 
 Slider.propTypes = {

@@ -1,17 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Product = ({product, buttonText, settings, setCart, cartItems, onDeleteProduct}) => {
+const Product = ({product, buttonText, settings, setCart, cartItems, onDeleteProductSettings}) => {
 
     const addCart = () => {
-        setCart([...cartItems, {
-            src: product.src,
-            title: product.title,
-            unit_price: product.unit_price,
-            description: product.description,
-            quantity: product.quantity,
-            product_id: product.product_id
-          }])
+
+        const arr = cartItems.filter((cartItem)=> cartItem.product_id === product.product_id);
+
+        console.log(arr.length === 0);
+
+        if (arr.length === 0) {
+            setCart([...cartItems, {
+                src: product.src,
+                title: product.title,
+                unit_price: product.unit_price,
+                description: product.description,
+                quantity: product.quantity,
+                product_id: product.product_id
+            }])
+        }
+
+        else {
+            cartItems.map((cartItem)=> cartItem.product_id === product.product_id ? cartItem.quantity = Number(cartItem.quantity) + 1 : cartItem);
+            setCart([...cartItems]);
+        }
+
+        
     }
 
   return (
@@ -25,7 +39,7 @@ const Product = ({product, buttonText, settings, setCart, cartItems, onDeletePro
         <p className="introText">ფასი : {product.unit_price} ₾</p>
         <p className="introText">{product.description}</p>
         {
-            settings ? <button className="introButton delete" onClick={() => onDeleteProduct(product.product_id)} >წაშლა</button> :
+            settings ? <button className="introButton delete" onClick={() => onDeleteProductSettings(product.product_id)} >წაშლა</button> :
             <button className="introButton" onClick={addCart}>{buttonText}</button>
         }
         

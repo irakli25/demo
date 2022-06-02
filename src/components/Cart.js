@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartItem from './CartItem'
 import { HiOutlineX } from 'react-icons/hi';
 
-const Cart = ({cartItems, setCart, show, onToggleCart, settings }) => {
+const Cart = ({cartItems, setCart, show, onToggleCart, settings, onDeleteProductCart}) => {
 
   const buy = () => {
+      settings.purchase_units.basket = [];
+      cartItems.map((item) => {
+        const { quantity, unit_price, description, product_id } = item;
+        settings.purchase_units.basket.push({ quantity, unit_price, description, product_id });
+        return item;
+      })
+      console.log( settings.purchase_units.basket);
     fetch('http://localhost:4000/geturl',{
       method: 'POST', 
       headers: {
@@ -13,7 +20,8 @@ const Cart = ({cartItems, setCart, show, onToggleCart, settings }) => {
       body: JSON.stringify(settings)
   }).then(async (res)=>{
       res.json().then((json) => {
-          window.open(json.links[1].href, '_blank').focus();
+         const redirect = json._links.redirect.href;
+          window.open(redirect, '_blank').focus();
       });
   })
   }
@@ -27,7 +35,7 @@ const Cart = ({cartItems, setCart, show, onToggleCart, settings }) => {
           <div className='scrollY'>
             {
                 cartItems.map((item) => (
-                    <CartItem product ={item} key = {item.product_id} setCart={setCart} cartItems = {cartItems} onClose = {onToggleCart}/>
+                    <CartItem product ={item} key = {item.product_id} setCart={setCart} cartItems = {cartItems} onClose = {onToggleCart} onDeleteProductCart= {onDeleteProductCart}/>
                 ))
             }
           </div>

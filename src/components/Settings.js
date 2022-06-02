@@ -4,22 +4,22 @@ import { React, useState } from 'react'
 import Products from './Products'
 import { HiPlus } from 'react-icons/hi';
 
-const Settings = ({products, setProducts, settings, setSettings}) => {
+const Settings = ({products, setProducts, settings, setSettings, onDeleteProductCart}) => {
 
   // settings
 
-  const [ttl, setTtl] = useState('');
-  const [RedirectUrlsSuccess, setRedirectUrlsSuccess] = useState('');
-  const [redirectUrlsFail, setRedirectUrlsFail] = useState('');
-  const [callbackUrl, setCallbackUrl] = useState('');
-  const [externalOrderId, setExternalOrderId] = useState('');
-  const [purchaseUnitsTotalAmount, setPurchaseUnitsTotalAmount] = useState('');
-  const [purchaseUnitsTotalAmountDeliveryAmount, setPurchaseUnitsTotalAmountDeliveryAmount] = useState('');
-  const [purchaseUnitsTotalAmountDeliveryExclude, setPurchaseUnitsTotalAmountDeliveryExclude] = useState('');
-  const [purchaseUnitsCurrency, setPurchaseUnitsCurrency] = useState('');
-  const [buyerFullName, setBuyerFullName] = useState('');
-  const [buyerMaskedEmail, setBuyerMaskedEmail] = useState('');
-  const [buyerMaskedPhone, setBuyerMaskedPhone] = useState('');
+  const [ttl, setTtl] = useState(settings.ttl);
+  const [RedirectUrlsSuccess, setRedirectUrlsSuccess] = useState(settings.redirect_urls.success);
+  const [redirectUrlsFail, setRedirectUrlsFail] = useState(settings.redirect_urls.fail);
+  const [callbackUrl, setCallbackUrl] = useState(settings.callback_url);
+  const [externalOrderId, setExternalOrderId] = useState(settings.external_order_id);
+  const [purchaseUnitsTotalAmount, setPurchaseUnitsTotalAmount] = useState(settings.purchase_units.total_amount);
+  const [purchaseUnitsTotalAmountDeliveryAmount, setPurchaseUnitsTotalAmountDeliveryAmount] = useState(settings.purchase_units.delivery.amount);
+  const [purchaseUnitsTotalAmountDeliveryExclude, setPurchaseUnitsTotalAmountDeliveryExclude] = useState(settings.purchase_units.delivery.exclude);
+  const [purchaseUnitsCurrency, setPurchaseUnitsCurrency] = useState(settings.purchase_units.currency);
+  const [buyerFullName, setBuyerFullName] = useState(settings.buyer.full_name);
+  const [buyerMaskedEmail, setBuyerMaskedEmail] = useState(settings.buyer.masked_email);
+  const [buyerMaskedPhone, setBuyerMaskedPhone] = useState(settings.buyer.masked_phone);
 
 
   // products
@@ -102,7 +102,7 @@ const Settings = ({products, setProducts, settings, setSettings}) => {
 
                 <div className="serviceItem form">
                     <label htmlFor="purchase_units_total_amount">purchase_units_total_amount</label>
-                    <input type="text" onKeyUp={(e)=>setPurchaseUnitsTotalAmount(e.target.value)} id="purchase_units_total_amount" name="purchase_units_total_amount" placeholder="purchase_units_total_amount" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setPurchaseUnitsTotalAmount(e.target.value)} id="purchase_units_total_amount" name="purchase_units_total_amount" placeholder="purchase_units_total_amount" autoComplete="off" defaultValue={purchaseUnitsTotalAmount} required />
                 </div>
 
                 <div className="serviceItem form">
@@ -149,7 +149,7 @@ const Settings = ({products, setProducts, settings, setSettings}) => {
             <div className="shout">
                 <p>“ Products settings „</p>
             </div>
-            <Products products={products} setProducts = {setProducts} settings = {true}/>
+            <Products products={products} setProducts = {setProducts} settings = {true} onDeleteProductCart = {onDeleteProductCart}/>
             <div className='addProduct'>
                 <div className="serviceItem form">
                     <label htmlFor="addImg">სურათის ლინკი</label>
