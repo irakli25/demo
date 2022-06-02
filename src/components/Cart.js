@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import CartItem from './CartItem'
 import { HiOutlineX } from 'react-icons/hi';
 

@@ -9,7 +9,7 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
   // settings
 
   const [ttl, setTtl] = useState(settings.ttl);
-  const [RedirectUrlsSuccess, setRedirectUrlsSuccess] = useState(settings.redirect_urls.success);
+  const [redirectUrlsSuccess, setRedirectUrlsSuccess] = useState(settings.redirect_urls.success);
   const [redirectUrlsFail, setRedirectUrlsFail] = useState(settings.redirect_urls.fail);
   const [callbackUrl, setCallbackUrl] = useState(settings.callback_url);
   const [externalOrderId, setExternalOrderId] = useState(settings.external_order_id);
@@ -43,7 +43,7 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
     setSettings({
                   ttl: ttl,
                   redirect_urls: {
-                    success: RedirectUrlsSuccess,
+                    success: redirectUrlsSuccess,
                     fail: redirectUrlsFail
                   },
                   callback_url: callbackUrl,
@@ -77,27 +77,27 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
 
                 <div className="serviceItem form">
                     <label htmlFor="ttl">ttl</label>
-                    <input type="text" onKeyUp={(e)=>setTtl(e.target.value)} id="ttl" name="ttl" placeholder="ttl" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setTtl(e.target.value)} id="ttl" name="ttl" placeholder="ttl" autoComplete="off" defaultValue={ttl} required />
                 </div>
 
                 <div className="serviceItem form">
                     <label htmlFor="redirect_urls_success">redirect_urls_success</label>
-                    <input type="text" onKeyUp={(e)=>setRedirectUrlsSuccess(e.target.value)} id="redirect_urls_success" name="redirect_urls_success" placeholder="redirect_urls_success" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setRedirectUrlsSuccess(e.target.value)} id="redirect_urls_success" name="redirect_urls_success" placeholder="redirect_urls_success" autoComplete="off" defaultValue={redirectUrlsSuccess} required />
                 </div>
 
                 <div className="serviceItem form">
                     <label htmlFor="redirect_urls_fail">redirect_urls_fail</label>
-                    <input type="text" onKeyUp={(e)=>setRedirectUrlsFail(e.target.value)} id="redirect_urls_fail" name="redirect_urls_fail" placeholder="redirect_urls_fail" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setRedirectUrlsFail(e.target.value)} id="redirect_urls_fail" name="redirect_urls_fail" placeholder="redirect_urls_fail" autoComplete="off" defaultValue={redirectUrlsFail} required />
                 </div>
 
                 <div className="serviceItem form">
                     <label htmlFor="callback_url">callback_url</label>
-                    <input type="text" onKeyUp={(e)=>setCallbackUrl(e.target.value)} id="callback_url" name="callback_url" placeholder="callback_url" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setCallbackUrl(e.target.value)} id="callback_url" name="callback_url" placeholder="callback_url" autoComplete="off" defaultValue={callbackUrl} required />
                 </div>
 
                 <div className="serviceItem form">
                     <label htmlFor="external_order_id">external_order_id</label>
-                    <input type="text" onKeyUp={(e)=>setExternalOrderId(e.target.value)} id="external_order_id" name="external_order_id" placeholder="external_order_id" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setExternalOrderId(e.target.value)} id="external_order_id" name="external_order_id" placeholder="external_order_id" autoComplete="off" defaultValue={externalOrderId} required />
                 </div>
 
                 <div className="serviceItem form">
@@ -107,11 +107,11 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
 
                 <div className="serviceItem form">
                     <label htmlFor="purchase_units_total_amount_delivery_amount">purchase_units_total_amount_delivery_amount</label>
-                    <input type="text" onKeyUp={(e)=>setPurchaseUnitsTotalAmountDeliveryAmount(e.target.value)} id="purchase_units_total_amount_delivery_amount" name="purchase_units_total_amount_delivery_amount" placeholder="purchase_units_total_amount_delivery_amount" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setPurchaseUnitsTotalAmountDeliveryAmount(e.target.value)} id="purchase_units_total_amount_delivery_amount" name="purchase_units_total_amount_delivery_amount" placeholder="purchase_units_total_amount_delivery_amount" autoComplete="off" defaultValue={purchaseUnitsTotalAmountDeliveryAmount} required />
                 </div>
 
                 <div className="serviceItem form">
-                    <input type="checkbox" onChange={(e)=>setPurchaseUnitsTotalAmountDeliveryExclude(e.target.checked)} id="purchase_units_total_amount_delivery_exclude" name="purchase_units_total_amount_delivery_exclude" defaultChecked />
+                    <input type="checkbox" onChange={(e)=>setPurchaseUnitsTotalAmountDeliveryExclude(e.target.checked)} id="purchase_units_total_amount_delivery_exclude" name="purchase_units_total_amount_delivery_exclude"  defaultChecked = {purchaseUnitsTotalAmountDeliveryExclude} />
                     <label htmlFor="purchase_units_total_amount_delivery_exclude">purchase_units_total_amount_delivery_exclude</label>
                 </div>
 
@@ -129,17 +129,17 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
 
                 <div className="serviceItem form">
                     <label htmlFor="buyer_full_name">buyer_full_name</label>
-                    <input type="text" onKeyUp={(e)=>setBuyerFullName(e.target.value)} id="buyer_full_name" name="buyer_full_name" placeholder="buyer_full_name" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setBuyerFullName(e.target.value)} id="buyer_full_name" name="buyer_full_name" placeholder="buyer_full_name" autoComplete="off" defaultValue={buyerFullName} required />
                 </div>
 
                 <div className="serviceItem form">
                     <label htmlFor="buyer_masked_email">buyer_masked_email</label>
-                    <input type="text" onKeyUp={(e)=>setBuyerMaskedEmail(e.target.value)} id="buyer_masked_email" name="buyer_masked_email" placeholder="buyer_masked_email" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setBuyerMaskedEmail(e.target.value)} id="buyer_masked_email" name="buyer_masked_email" placeholder="buyer_masked_email" autoComplete="off" defaultValue={buyerMaskedEmail} required />
                 </div>
 
                 <div className="serviceItem form">
                     <label htmlFor="buyer_masked_phone">buyer_masked_phone</label>
-                    <input type="text" onKeyUp={(e)=>setBuyerMaskedPhone(e.target.value)} id="buyer_masked_phone" name="buyer_masked_phone" placeholder="buyer_masked_phone" autoComplete="off" defaultValue="" required />
+                    <input type="text" onKeyUp={(e)=>setBuyerMaskedPhone(e.target.value)} id="buyer_masked_phone" name="buyer_masked_phone" placeholder="buyer_masked_phone" autoComplete="off" defaultValue={buyerMaskedPhone} required />
                 </div>
 
             </div>

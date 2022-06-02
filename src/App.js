@@ -29,7 +29,7 @@ const App = () => {
   ]);
   const [cartItems, setCart] = useLocalStorage('cart',[]);
   const [settings, setSettings] = useLocalStorage('settings',{
-    ttl: 0,
+    ttl: 2,
     redirect_urls: {
       success: '',
       fail: ''
@@ -37,7 +37,7 @@ const App = () => {
     callback_url: '',
     external_order_id: '123456',
     purchase_units: {
-      total_amount: '0',
+      total_amount: '10',
       delivery: {
         amount: '0',
         exclude: false

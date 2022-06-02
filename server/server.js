@@ -4,8 +4,6 @@ const cors = require('@koa/cors');
 const serve = require('koa-static');
 const KoaBodyParser = require('koa-bodyparser');
 const axiosInstance = require('./utils/axiosInstance');
-const session = require('koa-session');
-const mount = require('koa-mount');
 const qs = require('qs');
 const send = require('koa-send');
 
@@ -14,13 +12,6 @@ const router = new Router();
 app.use(cors());
 app.keys = ['secret'];
 app.use(KoaBodyParser());
-app.use(session({
-    key: 'demo.sess',
-    maxAge: 1000 * 60 * 30, // 30 minutes
-    rolling: true,
-    secure: false,
-    autoCommit: true,
-}, app));
 
 // const static_pages = new Koa();
 // static_pages.use(serve(__dirname + "./build"));
