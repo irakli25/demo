@@ -23,7 +23,9 @@ a{
 }
 
 :root{
-  --blue:#3bafbe;
+  --primary:#7938ea;
+  --secondary: #a478f1;
+  --delete: #c8232c;
   --iconBackground: #1f1f1f;
   --linkedin:#0e76a8;
   --twitter:#00acee;
@@ -65,7 +67,8 @@ background-color: #F5F5F5;
 
 ::-webkit-scrollbar-thumb
 {
-background-color: var(--blue);	
+  background: rgb(121,56,234);
+  background: linear-gradient(180deg, var(--primary) 39%, var(--secondary) 73%);
 border-radius: 50px;
 }
 
@@ -77,7 +80,7 @@ border-radius: 50px;
 
 header{
   position: sticky;
-  border-top: 5px solid var(--blue);
+  border-top: 5px solid var(--primary);
   border-bottom: 1px solid var(--borderBottom);
   width: 100%;
   z-index: 2;
@@ -179,7 +182,7 @@ section .container{
 }
 
 .searchButton{
-  background:var(--blue);
+  background:var(--primary);
   width:25%;
   color:var(--white);
   border:1px solid transparent;
@@ -190,9 +193,9 @@ section .container{
 
 .searchButton:hover{
   background:var(--white);
-  border:1px solid var(--blue);
+  border:1px solid var(--primary);
   transition: background 0.3s;
-  color:var(--blue);
+  color:var(--primary);
 }
 
 .downHeader{
@@ -204,16 +207,14 @@ section .container{
 }
 
 .logo{
-  width:160px;
-  height:45px;
-  background-position: center; 
+  background-position: center;
   background-repeat: no-repeat; 
   background-size: 50%; 
 }
 
 .logoItemUP{
   width:100%;
-  color: #4a4a4a;
+  color: var(--primary);
 }
 
 .logoItemDown{
@@ -224,17 +225,20 @@ section .container{
 }
 
 .navbar{
-  width:530px;
-  position:relative;
+  width: 530px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
 }
 
-.nav{
+nav{
   display:flex;
   justify-content: space-between;
   align-items: center;
   list-style: none;
   font-size:12px;
-  width:100%;
+  width: 265px;
   position: absolute;
   bottom:0;
   cursor:pointer;
@@ -242,12 +246,13 @@ section .container{
 
 .headerCart{
   font-size: 20px;
+  color: var(--delete);
 }
 
 .headerCartCounter{
   width: 16px;
   height: 16px;
-  background-color: var(--blue);
+  background-color: var(--primary);
   border-radius: 50%;
   font-size: 11px;
   position: absolute;
@@ -261,18 +266,18 @@ section .container{
   right: -12px;
 }
 
-.nav li a{
+nav a{
   color:var(--meniuColor);
   transition: color 0.3s;
 }
 
-.nav li a:hover{
-  color:var(--blue);
+nav a:hover{
+  color:var(--primary);
   transition: color 0.3s;
 }
 
-.nav .active a{
-  color:var(--blue);
+nav a.active{
+  color:var(--primary);
 }
 
 .slider{
@@ -333,7 +338,7 @@ section .container{
   width: 190px;
   height: 35px;
   font-size: 16px;
-  background-color: var(--blue);
+  background-color: var(--primary);
   border: 1px solid transparent;
   border-radius: 10px;
   color: var(--white);
@@ -344,8 +349,8 @@ section .container{
 
 .sliderButton:hover{
   background-color:var(--white);
-  border:1px solid var(--blue);
-  color:var(--blue);
+  border:1px solid var(--primary);
+  color:var(--primary);
   transition:0.3s;
 }
 
@@ -361,8 +366,8 @@ section .container{
 .dot{
   width:15px;
   height:15px;
-  border:3px solid var(--blue);
-  background-color:var(--blue);
+  border:3px solid var(--primary);
+  background-color:var(--primary);
   border-radius:50%;
   transition: background 0.3s;
   cursor:pointer;
@@ -413,7 +418,7 @@ section .container{
   font-size: 13px;
   width: 180px;
   height: 35px;
-  background-color: var(--blue);
+  background-color: var(--primary);
   border: 1px solid transparent;
   border-radius: 10px;
   color: var(--white);
@@ -423,13 +428,27 @@ section .container{
 
 .introButton:hover{
   background-color:var(--white);
-  border:1px solid var(--blue);
-  color:var(--blue);
+  border:1px solid var(--primary);
+  color:var(--primary);
   transition:0.3s;
 }
 
 .delete {
-  background-color: #c8232c;
+  background-color: var(--delete);
+}
+
+.delivery {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px 20px 0;
+  color: var(--secondary);
+}
+
+.delete:hover {
+  background-color:var(--white);
+  border:1px solid var(--delete);
+  color:var(--delete);
+  transition:0.3s;
 }
 
 .services{
@@ -485,7 +504,7 @@ section .container{
 }
 
 .serviceTitle{
-  color:var(--blue);
+  color:var(--primary);
   font-size:13px;
 }
 
@@ -512,7 +531,7 @@ footer{
 }
 
 .blue{
-  color:var(--blue)!important;
+  color:var(--primary)!important;
 }
 
 .contactLinks{
@@ -522,7 +541,7 @@ footer{
 
 }
 
-.contactLinks li a{
+.contactLinks a{
   color:var(--meniuColor);
   font-size: 12px;
 }
@@ -538,7 +557,7 @@ footer{
 }
 
 
-.quick li a{
+.quick a{
   font-size: 12px;
 }
 
@@ -589,7 +608,7 @@ footer{
 .newsletterForm button {
   width:80px;
   height:35px;
-  background-color: var(--blue);
+  background-color: var(--primary);
   border: 1px solid transparent;
   border-radius: 10px;
   color: var(--white);
@@ -600,8 +619,8 @@ footer{
 
 .newsletterForm button:hover{
   background-color:var(--white);
-  border:1px solid var(--blue);
-  color:var(--blue);
+  border:1px solid var(--primary);
+  color:var(--primary);
   transition:0.3s;
 }
 
@@ -726,7 +745,7 @@ button[disabled], button[disabled]:hover {
   background-color: transparent;
   border: none;
   display: flex;
-  color: var(--blue);
+  color: var(--primary);
   cursor: pointer;
 }
 
@@ -762,7 +781,7 @@ button[disabled], button[disabled]:hover {
 /*********************************************** inputs ********************************************/
 
 ::placeholder {
-  color: var(--blue);
+  color: var(--primary);
 }
 
 .form label {
@@ -781,7 +800,7 @@ clear:both;
 padding:15px 10px;
 width:100%;
 outline:none;
-border:1px solid var(--blue);
+border:1px solid var(--primary);
 border-radius:20px;
 display:inline-block;
 -webkit-box-sizing:border-box;
@@ -796,7 +815,7 @@ display:inline-block;
 
 .form input[type=text]:focus,
 .form input[type="password"]:focus {
-border-color: var(--linkedin);
+border-color: var(--secondary);
 }
 
 
@@ -811,7 +830,7 @@ select {
   /* Personalize */
   flex: 1;
   padding: 0 1em;
-  color: var(--blue);
+  color: var(--primary);
   background-color: var(--white);
   background-image: none;
   cursor: pointer;
@@ -838,14 +857,14 @@ select::-ms-expand {
   top: 0;
   right: 0;
   padding: 1em;
-  background-color:  var(--blue);
+  background-color:  var(--primary);
   transition: .25s all ease;
   pointer-events: none;
   color: var(--white);
 }
 /* Transition */
 .select:hover::after {
-  color: #f39c12;
+  color: var(--secondary);
 }
 
 
@@ -868,7 +887,7 @@ input[type=checkbox] {
 
 input[type=checkbox] + label:before {
   content: "\2714";
-  border: 0.1em solid var(--blue);
+  border: 0.1em solid var(--primary);
   border-radius: 0.2em;
   display: inline-block;
   width: 1em;
@@ -886,8 +905,8 @@ input[type=checkbox] + label:active:before {
 }
 
 input[type=checkbox]:checked + label:before {
-  background-color: var(--blue);
-  border-color: var(--blue);
+  background-color: var(--primary);
+  border-color: var(--primary);
   color: #fff;
 }
 

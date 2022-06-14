@@ -2,20 +2,18 @@ import {React, useEffect, useState } from 'react'
 
 import { HiMinus, HiPlus, HiOutlineX } from 'react-icons/hi';
 
-  const CartItem = ({product,setCart, cartItems, onDeleteProductCart}) => {
+  const CartItem = ({product,setCart, cartItems, onDeleteProductCart, totalPrice, setTotalPrice}) => {
 
     const [quantity, setQuantity] = useState(Number(product.quantity));
     const quantityIncrease = () => {
-      setQuantity(quantity + 1);
+      cartItems.map((cartItem)=> cartItem.product_id === product.product_id ? cartItem.quantity = quantity + 1 : cartItem);
+      setCart([...cartItems]);
     }
     const quantityDecrease = () => {
       if(quantity !== 1)
-        setQuantity(quantity - 1);
+        cartItems.map((cartItem)=> cartItem.product_id === product.product_id ? cartItem.quantity = quantity - 1: cartItem);
+        setCart([...cartItems]);
     }
-    // const changeQuantity = (e) => {
-    //   if(e.key >= 0 && e.key <= 9)
-    //   setQuantity(Number(e.key));
-    // }
     
     // onUpdateQuantity
     useEffect(()=> {

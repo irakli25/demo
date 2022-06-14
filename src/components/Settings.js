@@ -1,6 +1,6 @@
 
 
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import Products from './Products'
 import { HiPlus } from 'react-icons/hi';
 
@@ -38,6 +38,10 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
       product_id: product_id
     }])
   }
+
+  useEffect(()=> {
+    setPurchaseUnitsTotalAmount(settings.purchase_units.total_amount);
+  },[settings.purchase_units.total_amount, purchaseUnitsTotalAmount, settings])
 
   const saveSettings = () => {
     setSettings({
@@ -102,7 +106,7 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
 
                 <div className="serviceItem form">
                     <label htmlFor="purchase_units_total_amount">purchase_units_total_amount</label>
-                    <input type="text" onKeyUp={(e)=>setPurchaseUnitsTotalAmount(e.target.value)} id="purchase_units_total_amount" name="purchase_units_total_amount" placeholder="purchase_units_total_amount" autoComplete="off" defaultValue={purchaseUnitsTotalAmount} required />
+                    <input type="text" onChange={(e)=>console.log('------',e.target.value)} onKeyUp={(e)=>setPurchaseUnitsTotalAmount(e.target.value)} id="purchase_units_total_amount" name="purchase_units_total_amount" placeholder="purchase_units_total_amount" autoComplete="off" defaultValue={purchaseUnitsTotalAmount} required />
                 </div>
 
                 <div className="serviceItem form">
@@ -118,11 +122,11 @@ const Settings = ({products, setProducts, settings, setSettings, onDeleteProduct
                 <div className="serviceItem form">
                   <label htmlFor="purchase_units_currency">purchase_units_currency</label>
                   <div className="select">
-                    <select id="purchase_units_currency" onChange={(e)=>setPurchaseUnitsCurrency(e.target.value)}>
-                      <option value="GEL">GEL</option>
-                      <option value="USD">USD</option>
-                      <option value="EUR">EUR</option>
-                      <option value="GBP">GBP</option>
+                    <select id="purchase_units_currency" defaultValue = {purchaseUnitsCurrency} onChange={(e)=>setPurchaseUnitsCurrency(e.target.value)}>
+                      <option value="gel">GEL</option>
+                      <option value="usd">USD</option>
+                      <option value="eur">EUR</option>
+                      <option value="gbp">GBP</option>
                     </select>
                   </div>
                 </div>

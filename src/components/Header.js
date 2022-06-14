@@ -1,6 +1,6 @@
 import { React } from 'react'
 import PropTypes from 'prop-types'
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink, activeClassName } from "react-router-dom";
 import { HiShoppingCart } from 'react-icons/hi';
 
 const Header = ({   title, 
@@ -25,24 +25,21 @@ const Header = ({   title,
                     </div>
                 </div>
                 <div className="downHeader" >
+                    <NavLink to="/">
                         <div className="logo">
                             <div className="logoItemUP">
                                 <h1>{title}</h1>
                             </div>
-                        <div className="logoItemDown">
-                            <h6>{subtitle}</h6>
+                            <div className="logoItemDown">
+                                <h6>{subtitle}</h6>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
                     <div className="navbar">
                         <nav>
-                            <ul className="nav">
-                                <li className="active"><Link to="/">HOME</Link></li>
-                                <li><Link to="/settings">DEMO SETTINGS</Link></li>
-                                <li><Link to="/" >FULL WIDTH</Link></li>
-                                <li><Link to="/" >DROPDOWN</Link></li>
-                                <li><Link to="/" >PORTFOLIO</Link></li>
-                                <li className='headerCart' onClick={onToggleCart}><Link to="/" ><HiShoppingCart /><span className='headerCartCounter'>{cartCounter}</span></Link></li>
-                            </ul>
+                            <NavLink to="/">HOME</NavLink>
+                            <NavLink to="/settings">DEMO SETTINGS</NavLink>
+                            <HiShoppingCart className="headerCart" onClick={onToggleCart} /><span className='headerCartCounter'>{cartCounter}</span>
                         </nav>
                         <Outlet />
                     </div>

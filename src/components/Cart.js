@@ -2,7 +2,7 @@ import React from 'react'
 import CartItem from './CartItem'
 import { HiOutlineX } from 'react-icons/hi';
 
-const Cart = ({cartItems, setCart, show, onToggleCart, settings, onDeleteProductCart}) => {
+const Cart = ({cartItems, setCart, show, onToggleCart, settings, onDeleteProductCart, totalPrice, setTotalPrice}) => {
 
   const buy = () => {
       settings.purchase_units.basket = [];
@@ -12,7 +12,7 @@ const Cart = ({cartItems, setCart, show, onToggleCart, settings, onDeleteProduct
         return item;
       })
       console.log( settings.purchase_units.basket);
-    fetch('http://localhost:4000/geturl',{
+    fetch('api/geturl',{
       method: 'POST', 
       headers: {
           'Content-Type': 'application/json'
@@ -35,11 +35,17 @@ const Cart = ({cartItems, setCart, show, onToggleCart, settings, onDeleteProduct
           <div className='scrollY'>
             {
                 cartItems.map((item) => (
-                    <CartItem product ={item} key = {item.product_id} setCart={setCart} cartItems = {cartItems} onClose = {onToggleCart} onDeleteProductCart= {onDeleteProductCart}/>
+                    <CartItem totalPrice={totalPrice} setTotalPrice={setTotalPrice} product ={item} key = {item.product_id} setCart={setCart} cartItems = {cartItems} onClose = {onToggleCart} onDeleteProductCart= {onDeleteProductCart}/>
                 ))
             }
           </div>
-          <button className="introButton buy" id="buy" onClick={buy}>ყიდვა</button>
+          { settings.purchase_units.delivery.exclude ? 
+            (<div className='delivery'>
+              <div>მიტანის ღირებულება {settings.purchase_units.delivery.amount} ₾</div>
+            </div>) :null
+          }
+          
+          <button className="introButton buy" id="buy" onClick={buy}>ყიდვა ( {totalPrice} ₾ )</button>
         </div>
     </div>
   )

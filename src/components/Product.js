@@ -7,8 +7,6 @@ const Product = ({product, buttonText, settings, setCart, cartItems, onDeletePro
 
         const arr = cartItems.filter((cartItem)=> cartItem.product_id === product.product_id);
 
-        console.log(arr.length === 0);
-
         if (arr.length === 0) {
             setCart([...cartItems, {
                 src: product.src,
@@ -23,9 +21,7 @@ const Product = ({product, buttonText, settings, setCart, cartItems, onDeletePro
         else {
             cartItems.map((cartItem)=> cartItem.product_id === product.product_id ? cartItem.quantity = Number(cartItem.quantity) + 1 : cartItem);
             setCart([...cartItems]);
-        }
-
-        
+        }        
     }
 
   return (
